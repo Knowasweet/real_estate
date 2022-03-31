@@ -11,7 +11,7 @@ from .filters import PropertyFilter
 from .exceptions import PropertyNotFound
 from .models import Property, PropertyViews
 from .pagination import PropertyPagination
-from .serializers import PropertyCreateSerializer, PropertySerializer, PropertyViewSerializer
+from .serializers import PropertyCreateSerializer, PropertySerializer
 
 logger = logging.getLogger(__name__)
 
@@ -38,11 +38,6 @@ class ListAgentsPropertiesAPIView(generics.ListAPIView):
         user = self.request.user
         queryset = Property.objects.filter(user=user).order_by('-created_at')
         return queryset
-
-
-class PropertySearchView(generics.ListAPIView):
-    serializer_class = PropertyViewSerializer
-    queryset = Property.objects.all()
 
 
 class PropertyDetailView(APIView):

@@ -18,7 +18,7 @@ The real estate service provides a RESTful API that allows:
 - Django
 - Django Rest Framework
 - PostgreSQL
-- Docker, docker-compose, Makefile
+- Docker, Makefile, docker-compose
 - NGINX
 - Celery, Flower
 - Redis
@@ -27,7 +27,7 @@ The real estate service provides a RESTful API that allows:
 ## Docker Build Setup
 
 ```
-docker compose up --build -d --remove-orphans
+docker compose up -d --remove-orphans
 ```
 Makefile:
 ```
@@ -38,7 +38,7 @@ make build
 
 ### 1. Users
 1.1 User registration.
-Creates a new user with sending an email to the Mailtrap service for subsequent activation.
+Creates a new user with sending an email.
 
 ```
 POST api/v1/auth/users/
@@ -46,56 +46,44 @@ POST api/v1/auth/users/
 
 **Body**
 
-| Name        | Type  | Description     | Required field |
-|-------------|-------|-----------------|----------------|
-| email       | Email | email           | +              |
-| username    | Char  | username        | +              |
-| first_name  | Char  | first_name      | +              |
-| second_name | Char  | second_name     | +              |
-| password    | Char  | password        | +              |
-| re_password | Char  | repeat password | +              |
+| Name        | Type     | Description     | Required field |
+|-------------|----------|-----------------|----------------|
+| email       | string   | email           | +              |
+| username    | string   | username        | +              |
+| first_name  | string   | name            | +              |
+| second_name | string   | surname         | +              |
+| password    | string   | password        | +              |
+| re_password | string   | repeat password | +              |
 
 **Response**
 
 | Name        | Description |
 |-------------|-------------|
+| pkid        | primary key |
 | username    | username    |
 | first_name  | name        |
 | second_name | surname     |
 | email       | email       |
-| pkid        | primary key |
 
-1.2 User activation.
-Activation takes data from the link that went to Mailtrap.
 
-```
-POST api/v1/auth/users/activation/
-```
-**Body**
-
-| Name  | Type | Description | Required field |
-|-------|------|-------------|----------------|
-| uid   | Char | uid         | +              |
-| token | UUID | token       | +              |
-
-1.3 Creating a token.
+1.2 Login. Creating a token.
 
 ```
 POST api/v1/auth/jwt/create/
 ```
 **Body**
 
-| Name     | Type  | Description | Required field |
-|----------|-------|-------------|----------------|
-| email    | Email | email       | +              |
-| password | Char  | password    | +              |
+| Name     | Type     | Description | Required field |
+|----------|----------|-------------|----------------|
+| email    | string   | email       | +              |
+| password | string   | password    | +              |
 
 **Response**
 
-| Name    | Description |
-|---------|-------------|
-| refresh | username    |
-| access  | name        |
+| Name     | Description   |
+|----------|---------------|
+| refresh  | refresh token |
+| access   | access token  |
 
 The access field uses JSON Web Token authentication from Djoser.
 
@@ -103,19 +91,19 @@ The access field uses JSON Web Token authentication from Djoser.
 
 2.1 Self profile.
 ```
-GET api/v1/profile/me/
+GET api/v1/profile/
 ```
 
 **Response**
 
 | Name          | Description       |
 |---------------|-------------------|
+| id            | id                |
 | username      | username          |
 | first_name    | name              |
 | second_name   | surname           |
 | full_name     | name + surname    |
 | email         | email             |
-| id            | id                |
 | phone_number  | phone number      |
 | profile_image | profile photo     |
 | about_me      | description       |
@@ -137,18 +125,18 @@ PATCH api/v1/profile/update/<str:username>/
 ```
 **Body**
 
-| Name          | Type        | Description   | 
-|---------------|-------------|---------------|
-| phone_number  | PhoneNumber | phone number  |
-| profile_image | Image       | profile photo |
-| about_me      | Char        | description   |
-| gender        | Char        | gender        | 
-| country       | Country     | country       |
-| city          | Char        | city          |
-| buyer         | Boolean     | buyer         |
-| agent         | Boolean     | agent         |
-| buyer         | Boolean     | buyer         |
-| license       | Char        | license       | 
+| Name          | Type       | Description   | 
+|---------------|------------|---------------|
+| phone_number  | string     | phone number  |
+| profile_image | object     | profile photo |
+| about_me      | string     | description   |
+| gender        | string     | gender        | 
+| country       | string     | country       |
+| city          | string     | city          |
+| seller        | boolean    | seller        |
+| agent         | boolean    | agent         |
+| buyer         | boolean    | buyer         |
+| license       | string     | license       | 
 
 **Response**
 
@@ -160,7 +148,7 @@ PATCH api/v1/profile/update/<str:username>/
 | gender        | gender        |
 | country       | country       |
 | city          | city          |
-| buyer         | buyer         |
+| seller        | seller        |
 | agent         | agent         |
 | buyer         | buyer         |
 | license       | license       |
@@ -196,7 +184,7 @@ GET api/v1/profile/agents/
 | reviews       | reviews           |
 
 
-2.4 List of top agents
+2.4 List of top agents.
 
 ```
 GET api/v1/profile/agents/top
@@ -205,36 +193,37 @@ GET api/v1/profile/agents/top
 The same Response as in paragraph 2.3
 
 ### 3. Properties
-3.1 Create the property
+3.1 Create the property.
 ```
 POST api/v1/properties/create/
 ```
 **Body**
 
-| Name             | Type     | Description        | Required field |
-|------------------|----------|--------------------|----------------|
-| title            | Char     | name property      | +              |
-| country          | Country  | country            | -              |
-| city             | Char     | city               | -              |
-| property_street  | Char     | property street    | -              |
-| property_number  | Integer  | property number    | -              |
-| price            | Decimal  | price              | -              |
-| property_tax     | Decimal  | property tax       | -              |
-| advert_type      | Char     | advert type        | -              |
-| property_type    | Char     | property tax       | -              |
-| main_photo       | Image    | main photo         | -              |
-| photo1           | Image    | additional photo   | -              |
-| photo2           | Image    | additional photo   | -              |
-| photo3           | Image    | additional photo   | -              |
-| photo4           | Image    | additional photo   | -              |
-| published_status | Boolean  | published property | -              |
-| bathrooms        | Decimal  | bathrooms          | -              |
-| bedrooms         | Integer  | bedrooms           | -              |
-| number_of_floors | Integer  | number of floors   | -              |
-| plot_area        | Decimal  | plot area          | -              |
-| price            | Decimal  | price              | -              |
-| description      | Text     | description        | -              |
-| postal_code      | Char     | postal code        | -              |
+| Name             | Type    | Description                          | Required field |
+|------------------|---------|--------------------------------------|----------------|
+| title            | string  | name property                        | +              |
+| country          | string  | country                              | -              |
+| city             | string  | city                                 | -              |
+| property_street  | string  | property street                      | -              |
+| property_number  | number  | property number                      | -              |
+| price            | number  | price                                | -              |
+| property_tax     | number  | property tax                         | -              |
+| advert_type      | string  | sale/rent/auction                    | -              |
+| property_type    | string  | house/apartment/commercial premises/ | -              |
+|                  |         | office/warehouse/other               |                |
+| main_photo       | object  | main photo                           | -              |
+| photo1           | object  | additional photo                     | -              |
+| photo2           | object  | additional photo                     | -              |
+| photo3           | object  | additional photo                     | -              |
+| photo4           | object  | additional photo                     | -              |
+| published_status | boolean | published property                   | -              |
+| bathrooms        | number  | bathrooms                            | -              |
+| bedrooms         | number  | bedrooms                             | -              |
+| number_of_floors | number  | number of floors                     | -              |
+| plot_area        | number  | plot area                            | -              |
+| price            | number  | price                                | -              |
+| description      | string  | description                          | -              |
+| postal_code      | string  | postal code                          | -              |
 
 **Response**
 
@@ -269,36 +258,35 @@ POST api/v1/properties/create/
 | views            | number of views    |
 
 
-3.2 Update the property
+3.2 Update a property
 ```
 PUT api/v1/properties/update/<slug:slug>
 ```
 **Body**
 
-| Name             | Type     | Description        | 
-|------------------|----------|--------------------|
-| title            | Char     | name property      | 
-| country          | Country  | country            |
-| city             | Char     | city               |
-| property_street  | Char     | property street    |
-| property_number  | Integer  | property number    |
-| price            | Decimal  | price              |
-| property_tax     | Decimal  | property tax       |
-| advert_type      | Char     | advert type        |
-| property_type    | Char     | property tax       |
-| main_photo       | Image    | main photo         |
-| photo1           | Image    | additional photo   |
-| photo2           | Image    | additional photo   |
-| photo3           | Image    | additional photo   |
-| photo4           | Image    | additional photo   |
-| published_status | Boolean  | published property |
-| bathrooms        | Decimal  | bathrooms          |
-| bedrooms         | Integer  | bedrooms           |
-| number_of_floors | Integer  | number of floors   |
-| plot_area        | Decimal  | plot area          |
-| price            | Decimal  | price              |
-| description      | Text     | description        |
-| postal_code      | Char     | postal code        |
+| Name             | Type    | Description        | 
+|------------------|---------|--------------------|
+| title            | string  | property name      | 
+| country          | string  | country            |
+| city             | string  | city               |
+| property_street  | string  | property street    |
+| property_number  | number  | property number    |
+| price            | number  | price              |
+| property_tax     | number  | property tax       |
+| advert_type      | string  | advert type        |
+| property_type    | string  | property type      |
+| main_photo       | object  | main photo         |
+| photo1           | object  | additional photo   |
+| photo2           | object  | additional photo   |
+| photo3           | object  | additional photo   |
+| photo4           | object  | additional photo   |
+| published_status | boolean | published property |
+| bathrooms        | number  | bathrooms          |
+| bedrooms         | number  | bedrooms           |
+| number_of_floors | number  | number of floors   |
+| plot_area        | number  | plot area          |
+| description      | string  | description        |
+| postal_code      | string  | postal code        |
 
 **Response**
 
@@ -320,7 +308,7 @@ DELETE api/v1/properties/delete/<slug:slug>
 3.4 List of all properties
 
 ```
-GET api/v1/properties/all/
+GET api/v1/properties/
 ```
 
 **Response**
@@ -331,26 +319,17 @@ The same as in paragraph 3.1
 3.5 List of all real estate owned by agents
 
 ```
-GET api/v1/properties/all/
+GET api/v1/properties/agents/
 ```
 
 **Response**
 
 The same as in paragraph 3.1
 
-3.6 Real estate search
-```
-GET api/v1/properties/search/
-```
-
-**Response**
-
-The same as in paragraph 3.1
-
-3.7 Viewing real estate details
+3.6 Viewing real estate details
 
 ```
-GET api/v1/properties/detail/<slug:slug>
+GET api/v1/properties/<slug:slug>
 ``` 
 
 **Response**
@@ -368,35 +347,11 @@ POST api/v1/ratings/<str:profile_id>/
 
 | Name    | Type    | Description | Required field |
 |---------|---------|-------------|----------------|
-| rating  | Integer | rating      | +              |
-| comment | Text    | comment     | +              |
+| rating  | number  | rating      | +              |
+| comment | string  | comment     | +              |
 
 **Response**
 
 | Name    | Description |
 |---------|-------------|
 | message | success     |
-
-### 5. Offers
-
-Send a request for an offer.
-
-```
-POST api/v1/offers/
-```
-
-**Body**
-
-| Name         | Type        | Description  | Required field |
-|--------------|-------------|--------------|----------------|
-| name         | Char        | name         | +              |
-| email        | Email       | email        | +              |
-| subject      | Char        | subject      | +              |
-| message      | Text        | message      | +              |
-| phone_number | PhoneNumber | phone number | -              |
-
-**Response**
-
-| Name    | Description |
-|---------|-------------|
-| success | description |

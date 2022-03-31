@@ -50,7 +50,7 @@ class Property(TimeStampUUIDModel):
                                     default=0.0)
     number_of_floors = models.IntegerField(verbose_name=_('number of floors'), default=0)
     bedrooms = models.IntegerField(verbose_name=_('bedrooms'), default=1)
-    bathrooms = models.DecimalField(verbose_name=_('bathrooms'), max_digits=4, decimal_places=2, default=1.0)
+    bathrooms = models.IntegerField(verbose_name=_('bathrooms'), default=1)
     advert_type = models.CharField(verbose_name=_('advert type'), max_length=50, choices=AdvertType.choices,
                                    default=AdvertType.SALE)
     property_type = models.CharField(verbose_name=_('property type'), max_length=50, choices=PropertyType.choices,

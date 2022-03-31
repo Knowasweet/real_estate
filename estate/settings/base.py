@@ -49,7 +49,6 @@ LOCAL_APPS = [
     'apps.users',
     'apps.profiles',
     'apps.ratings',
-    'apps.offers',
     'apps.properties',
 ]
 
@@ -163,7 +162,7 @@ DJOSER = {
     "PASSWORD_RESET_CONFIRM_RETYPE": True,
     "USERNAME_RESET_CONFIRM_URL": "email/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "activate/{uid}/{token}",
-    "SEND_ACTIVATION_EMAIL": True,
+    "SEND_ACTIVATION_EMAIL": False,
     "SERIALIZERS": {
         "user_create": "apps.users.serializers.CreateUserSerializer,",
         "user": "apps.users.serializers.UserSerializer",

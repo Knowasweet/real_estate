@@ -9,7 +9,6 @@ urlpatterns = [
     path('api/v1/profile/', include('apps.profiles.urls')),
     path('api/v1/properties/', include('apps.properties.urls')),
     path('api/v1/ratings/', include('apps.ratings.urls')),
-    path('api/v1/offers/', include('apps.offers.urls')),
 ]
 
 admin.site.site_header = _('Estate Administrator')
