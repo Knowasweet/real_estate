@@ -1,0 +1,46 @@
+2022-03-29 18:25:05,220 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:50:26,765 django.utils.autoreload INFO     /app/apps/common/admin.py changed, reloading.
+2022-03-29 18:50:29,525 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:52:11,752 django.utils.autoreload INFO     /app/apps/offers/urls.py changed, reloading.
+2022-03-29 18:52:14,349 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:52:47,387 django.utils.autoreload INFO     /app/apps/offers/views.py changed, reloading.
+2022-03-29 18:52:49,818 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:53:49,325 django.utils.autoreload INFO     /app/apps/profiles/urls.py changed, reloading.
+2022-03-29 18:53:51,629 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:56:03,509 django.utils.autoreload INFO     /app/apps/properties/admin.py changed, reloading.
+2022-03-29 18:56:05,944 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:56:33,306 django.utils.autoreload INFO     /app/apps/properties/urls.py changed, reloading.
+2022-03-29 18:56:35,657 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:56:55,792 django.utils.autoreload INFO     /app/apps/ratings/views.py changed, reloading.
+2022-03-29 18:56:58,046 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:57:25,014 django.utils.autoreload INFO     /app/apps/ratings/views.py changed, reloading.
+2022-03-29 18:57:27,488 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:57:54,475 django.utils.autoreload INFO     /app/apps/ratings/views.py changed, reloading.
+2022-03-29 18:57:56,778 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:58:38,074 django.utils.autoreload INFO     /app/estate/urls.py changed, reloading.
+2022-03-29 18:58:40,401 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:58:48,270 django.utils.autoreload INFO     /app/estate/__init__.py changed, reloading.
+2022-03-29 18:58:50,689 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:59:04,801 django.utils.autoreload INFO     /app/estate/settings/base.py changed, reloading.
+2022-03-29 18:59:07,177 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:59:26,565 django.utils.autoreload INFO     /app/estate/settings/base.py changed, reloading.
+2022-03-29 18:59:28,752 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 18:59:48,158 django.utils.autoreload INFO     /app/estate/settings/base.py changed, reloading.
+2022-03-29 18:59:50,556 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 19:15:53,957 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 19:19:13,155 django.utils.autoreload INFO     /app/estate/settings/dev.py changed, reloading.
+2022-03-29 19:20:15,701 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 19:23:57,206 django.utils.autoreload INFO     /app/estate/settings/base.py changed, reloading.
+2022-03-29 19:23:59,391 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-29 19:24:18,105 django.utils.autoreload INFO     /app/estate/settings/dev.py changed, reloading.
+2022-03-29 19:27:09,396 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-31 16:06:58,048 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-31 16:23:38,108 django.request WARNING  Unauthorized: /api/v1/auth/jwt/create/
+2022-03-31 16:23:47,316 django.request WARNING  Unauthorized: /api/v1/auth/jwt/create/
+2022-03-31 16:24:16,259 django.request WARNING  Unauthorized: /api/v1/auth/jwt/create/
+2022-03-31 16:24:21,606 django.request WARNING  Unauthorized: /api/v1/auth/jwt/create/
+2022-03-31 16:25:40,938 django.request WARNING  Unauthorized: /api/v1/auth/jwt/create/
+2022-03-31 16:25:50,443 django.request WARNING  Unauthorized: /api/v1/auth/jwt/create/
+2022-03-31 20:11:19,388 django.utils.autoreload INFO     /app/apps/properties/views.py changed, reloading.
+2022-03-31 20:11:21,847 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-03-31 20:29:56,905 django.utils.autoreload INFO     Watching for file changes with StatReloader
